@@ -1,10 +1,6 @@
-'use strict';
+"use strict";
 
-import {
-  NativeModules,
-  NativeEventEmitter,
-  Platform,
-} from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from "react-native";
 
 const RNAppodeal = NativeModules.RNAppodeal;
 
@@ -19,41 +15,41 @@ const NON_SKIPPABLE_VIDEO = 256;
 const eventEmitter = new NativeEventEmitter(RNAppodeal);
 
 const eventHandlers = {
-  onInterstitialLoaded: 'onInterstitialLoaded',
-  onInterstitialClicked: 'onInterstitialClicked',
-  onInterstitialClosed: 'onInterstitialClosed',
-  onInterstitialFailedToLoad: 'onInterstitialFailedToLoad',
-  onInterstitialShown: 'onInterstitialShown',
+  onInterstitialLoaded: "onInterstitialLoaded",
+  onInterstitialClicked: "onInterstitialClicked",
+  onInterstitialClosed: "onInterstitialClosed",
+  onInterstitialFailedToLoad: "onInterstitialFailedToLoad",
+  onInterstitialShown: "onInterstitialShown",
 
-  onBannerClicked: 'onBannerClicked',
-  onBannerFailedToLoad: 'onBannerFailedToLoad',
-  onBannerLoaded: 'onBannerLoaded',
-  onBannerShown: 'onBannerShown',
+  onBannerClicked: "onBannerClicked",
+  onBannerFailedToLoad: "onBannerFailedToLoad",
+  onBannerLoaded: "onBannerLoaded",
+  onBannerShown: "onBannerShown",
 
-  onRewardedVideoClosed: 'onRewardedVideoClosed',
-  onRewardedVideoFailedToLoad: 'onRewardedVideoFailedToLoad',
-  onRewardedVideoFinished: 'onRewardedVideoFinished',
-  onRewardedVideoLoaded: 'onRewardedVideoLoaded',
-  onRewardedVideoShown: 'onRewardedVideoShown',
+  onRewardedVideoClosed: "onRewardedVideoClosed",
+  onRewardedVideoFailedToLoad: "onRewardedVideoFailedToLoad",
+  onRewardedVideoFinished: "onRewardedVideoFinished",
+  onRewardedVideoLoaded: "onRewardedVideoLoaded",
+  onRewardedVideoShown: "onRewardedVideoShown",
 
-  onNonSkippableVideoClosed: 'onNonSkippableVideoClosed',
-  onNonSkippableVideoFailedToLoad: 'onNonSkippableVideoFailedToLoad',
-  onNonSkippableVideoFinished: 'onNonSkippableVideoFinished',
-  onNonSkippableVideoLoaded: 'onNonSkippableVideoLoaded',
-  onNonSkippableVideoShown: 'onNonSkippableVideoShown',
+  onNonSkippableVideoClosed: "onNonSkippableVideoClosed",
+  onNonSkippableVideoFailedToLoad: "onNonSkippableVideoFailedToLoad",
+  onNonSkippableVideoFinished: "onNonSkippableVideoFinished",
+  onNonSkippableVideoLoaded: "onNonSkippableVideoLoaded",
+  onNonSkippableVideoShown: "onNonSkippableVideoShown",
 };
 
 const LogLevel = {
-  none: 'none',
-  debug: 'debug',
-  verbose: 'verbose'
-}
+  none: "none",
+  debug: "debug",
+  verbose: "verbose",
+};
 
 const Gender = {
-  male: 'male',
-  female: 'female',
-  other: 'other'
-}
+  male: "male",
+  female: "female",
+  other: "other",
+};
 
 const _subscriptions = new Map();
 
@@ -64,7 +60,7 @@ const addEventListener = (event, handler) => {
     listener = eventEmitter.addListener(mappedEvent, handler);
     _subscriptions.set(handler, listener);
     return {
-      remove: () => removeEventListener(event, handler)
+      remove: () => removeEventListener(event, handler),
     };
   } else {
     console.warn(`Trying to subscribe to unknown event: "${event}"`);
@@ -110,7 +106,8 @@ module.exports = {
   removeAllListeners,
   showToast: (message) => RNAppodeal.showToast(message),
   initialize: (appKey, adTypes) => RNAppodeal.initialize(appKey, adTypes),
-  show: (adTypes, placement, cb = () => {}) => RNAppodeal.show(adTypes, placement, cb),
+  show: (adTypes, placement, cb = () => {}) =>
+    RNAppodeal.show(adTypes, placement, cb),
   isLoaded: (adTypes, cb = () => {}) => RNAppodeal.isLoaded(adTypes, cb),
   cache: (adTypes) => RNAppodeal.cache(adTypes),
   hide: (adTypes) => RNAppodeal.hide(adTypes),
@@ -122,13 +119,20 @@ module.exports = {
   setBannerBackground: (value) => RNAppodeal.setBannerBackground(value),
   setTesting: (value) => RNAppodeal.setTesting(value),
   setLogLevel: (value) => RNAppodeal.setLogLevel(value),
-  setChildDirectedTreatment: (value) => RNAppodeal.setChildDirectedTreatment(value),
-  setOnLoadedTriggerBoth: (adTypes, value) => RNAppodeal.setOnLoadedTriggerBoth(adTypes, value),
-  disableNetwork: (network, adTypes) => RNAppodeal.disableNetwork(network, adTypes),
-  disableLocationPermissionCheck: () => RNAppodeal.disableLocationPermissionCheck(),
-  disableWriteExternalStoragePermissionCheck: () => RNAppodeal.disableWriteExternalStoragePermissionCheck(),
-  requestAndroidMPermissions: (cb = () => {}) => RNAppodeal.requestAndroidMPermissions(cb),
-  muteVideosIfCallsMuted: (value) => RNAppodeal.muteVideosIfCallsMuted(appKey, adTypes),
+  setChildDirectedTreatment: (value) =>
+    RNAppodeal.setChildDirectedTreatment(value),
+  setOnLoadedTriggerBoth: (adTypes, value) =>
+    RNAppodeal.setOnLoadedTriggerBoth(adTypes, value),
+  disableNetwork: (network, adTypes) =>
+    RNAppodeal.disableNetwork(network, adTypes),
+  disableLocationPermissionCheck: () =>
+    RNAppodeal.disableLocationPermissionCheck(),
+  disableWriteExternalStoragePermissionCheck: () =>
+    RNAppodeal.disableWriteExternalStoragePermissionCheck(),
+  requestAndroidMPermissions: (cb = () => {}) =>
+    RNAppodeal.requestAndroidMPermissions(cb),
+  muteVideosIfCallsMuted: (value) =>
+    RNAppodeal.muteVideosIfCallsMuted(appKey, adTypes),
   showTestScreen: () => RNAppodeal.showTestScreen(),
   getVersion: (cb = () => {}) => RNAppodeal.getVersion(cb),
   // canShow,
@@ -136,8 +140,10 @@ module.exports = {
   // setCustomBooleanRule: (name, value) => RNAppodeal.setCustomBooleanRule(name, value),
   // setCustomIntegerRule: (name, value) => RNAppodeal.setCustomIntegerRule(name, value),
   // setCustomDoubleRule: (name, value) => RNAppodeal.setCustomDoubleRule(name, value),
-  trackInAppPurchase: (amount, currency) => RNAppodeal.trackInAppPurchase(amount, currency),
-  getRewardParameters: (placement, cb = () => {}) => RNAppodeal.getRewardParameters(placement, cb),
+  trackInAppPurchase: (amount, currency) =>
+    RNAppodeal.trackInAppPurchase(amount, currency),
+  getRewardParameters: (placement, cb = () => {}) =>
+    RNAppodeal.getRewardParameters(placement, cb),
   setAge: (age) => RNAppodeal.setAge(age),
   setGender: (gender) => RNAppodeal.setGender(gender),
   setUserId: (id) => RNAppodeal.setUserId(id),
