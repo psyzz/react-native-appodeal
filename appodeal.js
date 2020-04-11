@@ -147,4 +147,7 @@ module.exports = {
   setAge: (age) => RNAppodeal.setAge(age),
   setGender: (gender) => RNAppodeal.setGender(gender),
   setUserId: (id) => RNAppodeal.setUserId(id),
+
+  // NEW FUNCTIONS :
+  updateConsent: (bool) => RNAppodeal.updateConsent(bool),
 };

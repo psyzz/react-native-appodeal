@@ -74,10 +74,16 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 			callback.invoke(result);
 		}
 	}
+	
 
 	@ReactMethod
 	public void cache(int adTypes){
 		Appodeal.cache(getCurrentActivity(), adTypes);
+	}
+
+	@ReactMethod
+	public void updateConsent(boolean consent){
+		Appodeal.updateConsent(consent);
 	}
 
 	@ReactMethod
@@ -258,7 +264,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 	@ReactMethod
 	public void setUserId(String id){
 		getUserSettings().setUserId(id);
-	}
+	}	
 
 	@ReactMethod
 	public void setGender(String gender){
