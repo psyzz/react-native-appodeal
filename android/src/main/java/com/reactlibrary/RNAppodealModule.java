@@ -49,10 +49,47 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 	}
 
 	@ReactMethod
-	public void initialize(String appKey, int adTypes) {
-		Appodeal.setFramework("react-native", "2.5.1");
-		Appodeal.initialize(getCurrentActivity(), appKey, adTypes);
+	public void initialize(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, adTypes, consent);
 	}
+
+	@ReactMethod
+	public void initializeWithConsent(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.NON_SKIPPABLE_VIDEO, consent);
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.REWARDED_VIDEO, consent);
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.INTERSTITIAL, consent);
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.BANNER_TOP, consent);
+		// Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.SKIPPABLE_VIDEO, consent);
+	}
+
+	@ReactMethod
+	public void initializeSkippableVideo(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, 2, consent);
+	}
+
+	public void initializeNonSkippable(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.NON_SKIPPABLE_VIDEO, consent);
+	}
+	@ReactMethod
+	public void initializeRewarded(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.REWARDED_VIDEO, consent);
+	}
+	@ReactMethod
+	public void initializeInterstitial(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.INTERSTITIAL, consent);
+	}
+	@ReactMethod
+	public void initializeBannerTop(String appKey, int adTypes, boolean consent) {
+		// Appodeal.setFramework("react-native", "2.6.3");
+		Appodeal.initialize(getCurrentActivity(), appKey, Appodeal.BANNER_TOP, consent);
+	}
+
 
 	@ReactMethod
 	public void show(int adTypes, String placement, Callback callback){
@@ -61,6 +98,19 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 			result = Appodeal.show(getCurrentActivity(), adTypes);
 		} else {
 			result = Appodeal.show(getCurrentActivity(), adTypes, placement);
+		}
+		if (callback != null) {
+			callback.invoke(result);
+		}
+	}
+
+	@ReactMethod
+	public void showNonSkipableVideo(int adTypes, String placement, Callback callback){
+		boolean result;
+		if (placement == null) {
+			result = Appodeal.show(getCurrentActivity(), Appodeal.NON_SKIPPABLE_VIDEO);
+		} else {
+			result = Appodeal.show(getCurrentActivity(), Appodeal.NON_SKIPPABLE_VIDEO, placement);
 		}
 		if (callback != null) {
 			callback.invoke(result);
@@ -94,6 +144,11 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 	@ReactMethod
 	public void setAutoCache(int adTypes, boolean isEnabled){
 		Appodeal.setAutoCache(adTypes, isEnabled);
+	}
+
+	@ReactMethod
+	public void setAutoCacheNonSkipableVideo(int adTypes, boolean isEnabled){
+		Appodeal.setAutoCache(Appodeal.NON_SKIPPABLE_VIDEO, isEnabled);
 	}
 
 	@ReactMethod

@@ -5,12 +5,23 @@ import { NativeModules, NativeEventEmitter, Platform } from "react-native";
 const RNAppodeal = NativeModules.RNAppodeal;
 
 const NONE = 0;
+const SKIPPABLE_VIDEO = 2;
 const INTERSTITIAL = 3;
 const BANNER = 4;
 const BANNER_BOTTOM = 8;
 const BANNER_TOP = 16;
 const REWARDED_VIDEO = 128;
-const NON_SKIPPABLE_VIDEO = 256;
+const NON_SKIPPABLE_VIDEO = 128;
+
+// For Android
+// // SKIPPABLE_VIDEO = 2;
+// // INTERSTITIAL = 3;
+// // BANNER = 4;
+// // BANNER_BOTTOM = 8;
+// // BANNER_TOP = 16;
+// // BANNER_VIEW = 64;
+// // REWARDED_VIDEO = 128;
+// // NON_SKIPPABLE_VIDEO = 128;
 
 const eventEmitter = new NativeEventEmitter(RNAppodeal);
 
@@ -99,19 +110,33 @@ module.exports = {
   BANNER_BOTTOM,
   REWARDED_VIDEO,
   NON_SKIPPABLE_VIDEO,
+  SKIPPABLE_VIDEO,
   LogLevel,
   Gender,
   addEventListener,
   removeEventListener,
   removeAllListeners,
   showToast: (message) => RNAppodeal.showToast(message),
-  initialize: (appKey, adTypes) => RNAppodeal.initialize(appKey, adTypes),
+  initializeInterstitial: (appKey, adTypes, consent) =>
+    RNAppodeal.initializeInterstitial(appKey, adTypes, consent),
+  initializeBannerTop: (appKey, adTypes, consent) =>
+    RNAppodeal.initializeBannerTop(appKey, adTypes, consent),
+  initializeSkippableVideo: (appKey, adTypes, consent) =>
+    RNAppodeal.initializeSkippableVideo(appKey, adTypes, consent),
+  initializeWithConsent: (appKey, adTypes, consent) =>
+    RNAppodeal.initializeWithConsent(appKey, adTypes, consent),
+  initialize: (appKey, adTypes, consent) =>
+    RNAppodeal.initialize(appKey, adTypes, consent),
+  showNonSkipableVideo: (adTypes, placement, cb = () => {}) =>
+    RNAppodeal.showNonSkipableVideo(adTypes, placement, cb),
   show: (adTypes, placement, cb = () => {}) =>
     RNAppodeal.show(adTypes, placement, cb),
   isLoaded: (adTypes, cb = () => {}) => RNAppodeal.isLoaded(adTypes, cb),
   cache: (adTypes) => RNAppodeal.cache(adTypes),
   hide: (adTypes) => RNAppodeal.hide(adTypes),
   setAutoCache: (adTypes, value) => RNAppodeal.setAutoCache(adTypes, value),
+  setAutoCacheNonSkipableVideo: (adTypes, value) =>
+    RNAppodeal.setAutoCacheNonSkipableVideo(adTypes, value),
   isPrecache: (adTypes, cb = () => {}) => RNAppodeal.isPrecache(adTypes, cb),
   setTabletBanners: (value) => RNAppodeal.setTabletBanners(value),
   setSmartBanners: (value) => RNAppodeal.setSmartBanners(value),
