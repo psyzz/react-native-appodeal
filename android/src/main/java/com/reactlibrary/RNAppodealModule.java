@@ -364,12 +364,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
 	@Override
 	public void onInterstitialShowFailed() {
-		// sendEventToJS("onInterstitialShowFailed", null);
+		sendEventToJS("onInterstitialShowFailed", null);
 	}
 
 	@Override
 	public void onInterstitialExpired() {
-		// sendEventToJS("onInterstitialExpired", null);
+		sendEventToJS("onInterstitialExpired", null);
 	}
 
 	@Override
